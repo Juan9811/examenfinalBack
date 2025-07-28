@@ -1,35 +1,23 @@
 package com.example.profesorbackend.model;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.Set;
 
-@Entity
+@Document(collection = "usuarios")
 public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    @Column(nullable = false, unique = true)
     private String usuario;
-
-    @Column(nullable = false)
     @JsonIgnore
     private String contrasena;
-
-    @Column(nullable = false)
     private String email;
-
-    @Column(nullable = false)
     private String rol; // "ADMIN" o "PROFESOR"
 
-    @OneToOne(mappedBy = "usuario")
-    @JsonIgnore
-    private Profesor profesor;
-
     // Getters y setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
     public String getUsuario() { return usuario; }
     public void setUsuario(String usuario) { this.usuario = usuario; }
     public String getContrasena() { return contrasena; }
@@ -38,6 +26,4 @@ public class Usuario {
     public void setEmail(String email) { this.email = email; }
     public String getRol() { return rol; }
     public void setRol(String rol) { this.rol = rol; }
-    public Profesor getProfesor() { return profesor; }
-    public void setProfesor(Profesor profesor) { this.profesor = profesor; }
 }
